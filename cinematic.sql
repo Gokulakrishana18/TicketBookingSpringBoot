@@ -265,3 +265,28 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2019-08-19  0:50:01
+-- Alter the sql thing how i want for Seat object
+CREATE TABLE `seat` (
+  `seat_id` bigint(20) NOT NULL,
+  `seat_number` int(11) DEFAULT NULL,
+  `auditorium_id` bigint(20) DEFAULT NULL,
+  `is_booked` boolean,
+  `seat_type` varchar(20),
+  `seat_price` int(4) Default NULL,
+  PRIMARY KEY (`seat_id`),
+  KEY `FKotpis64jx0uqh3k507csp9ire` (`auditorium_id`)
+)
+LOCK TABLES `seat` WRITE;
+/*!40000 ALTER TABLE `seat` DISABLE KEYS */;
+INSERT INTO `seat` VALUES (1,1,1,false,'uppercase',150),
+(2,2,1,false,'uppercase',150),
+(3,3,1,true,'lowercase',100),
+(4,4,1,false,'uppercase',150),
+(5,5,1,true,'uppercase',150),
+(6,1,2,false,'uppercase',150),
+(7,2,2,false,'lowercase',100),
+(8,3,2,true,'uppercase',150),
+(9,4,2,false,'uppercase',150),
+(10,5,2,true,'lowercase',100);
+/*!40000 ALTER TABLE `seat` ENABLE KEYS */;
+UNLOCK TABLES;
