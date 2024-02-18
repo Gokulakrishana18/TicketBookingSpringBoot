@@ -1,6 +1,7 @@
 package me.jysh.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,6 +25,7 @@ public class Theatre {
     private String location;
 
     @OneToMany(mappedBy = "theatre", cascade = CascadeType.ALL)
-  @JsonBackReference
+//  @JsonBackReference
+    @JsonIgnore
     private Set<Auditorium> auditoriums;
 }

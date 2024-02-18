@@ -1,6 +1,7 @@
 package me.jysh.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
@@ -15,8 +16,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
+//@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+//        allowGetters = true)
 @Table(name = "seat")
 public class Seat {
     @Id
@@ -38,10 +39,12 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "auditorium_id")
-    @JsonManagedReference
+   // @JsonManagedReference
+  // @JsonBackReference
+
     private Auditorium auditorium;
 
-    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private Set<SeatBooked> bookedSeats;
+//    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
+//    @JsonBackReference
+//    private Set<SeatBooked> bookedSeats;
 }

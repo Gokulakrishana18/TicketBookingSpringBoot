@@ -1,6 +1,7 @@
 package me.jysh.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -8,13 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
-        allowGetters = true)
+//@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+//        allowGetters = true)
 @Entity
 
 @Table(name = "auditorium")
@@ -29,12 +31,25 @@ public class Auditorium {
 
     @ManyToOne
     @JoinColumn(name = "theatre_id")
-   @JsonManagedReference
+    //@JsonManagedReference
     private Theatre theatre;
 
     @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
-    @JsonBackReference
+    //@JsonBackReference
+    //@JsonManagedReference
+    @JsonIgnore
+    @JsonIgnoreProperties("auditorium")
     private Set<Seat> seats;
+
+//    @ManyToOne
+//    @JoinColumn(name = "theatre_id")
+//   @JsonManagedReference
+//    private Theatre theatre;
+//
+//    @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
+//    //@JsonBackReference
+//    @JsonIgnoreProperties("auditorium")
+//    private List<Seat> seats;
 
     //@OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL)
 //    @JsonBackReference

@@ -1,8 +1,10 @@
 package me.jysh.cinematic.service.impl;
 
+import me.jysh.cinematic.exception.SeatNotFoundException;
 import me.jysh.cinematic.model.Seat;
 import me.jysh.cinematic.repository.SeatRepository;
 import me.jysh.cinematic.service.SeatService;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +33,18 @@ public class SeatServiceImpl implements SeatService {
         System.out.println("Theater_id :"+theater_id);
         System.out.println("auditorium_id :"+auditorium_id);
         log.info("Auditorium id :",auditorium_id);
-        List<Seat> filterList =seatRepository.findAll().stream().filter(item-> item.getAuditorium()
+        List<Seat> filterList =seatRepository.findAll().stream().
+                filter(item-> item.getAuditorium()
                 .getTheatre().getId()==theater_id  ).
                 collect(Collectors.toList());
+        System.out.println("After the filter theater_id");
         List<Seat> secondFilter = filterList.stream().
                 filter(item->item.getAuditorium().
                         getId()==auditorium_id).
                 collect(Collectors.toList());
-       log.info("Second  List :",secondFilter.toString()) ;
-//        && item.getAuditorium().
-//                getTheatre().getId()==theater_id
+        System.out.println("After the filter");
+           log.info("Second  List :",secondFilter.toString()) ;
+        System.out.println("List :"+ seatRepository.findAll().toString());
         return secondFilter;
     }
 
@@ -55,20 +59,25 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public String updateSeat(Seat updatedSeat) {
+    public void updateSeat(List<Seat> updatedSeat) {
         //Seat getTheSeat = new Seat();
-       List<Seat> setTheValue = Collections.singletonList(updatedSeat);
-       for(Seat seat:setTheValue){
-          // Seat getTheSeat = new Seat();
-         Long id =   seat.getId();
-         Seat getTheSeatDetailsForId = seatRepository.findById(id).get();
-           getTheSeatDetailsForId.setBooked(seat.isBooked());
-           getTheSeatDetailsForId.setSeatNumber(seat.getSeatNumber());
-           getTheSeatDetailsForId.setSeatPrice(seat.getSeatPrice());
-           getTheSeatDetailsForId.setSeatType(seat.getSeatType());
-          seatRepository.save(getTheSeatDetailsForId);
+       List<Seat> setTheValue = updatedSeat;
+       for(Seat seat:setTheValue) {
+           // Seat getTheSeat = new Seat();
+           Long id = seat.getId();
+           Seat getTheSeatDetailsForId = seatRepository.findById(id).orElseThrow(() -> new SeatNotFoundException("Seat not found with this id"));
+           if(!getTheSeatDetailsForId.isBooked()) {
+               getTheSeatDetailsForId.setBooked(seat.isBooked());
+               seatRepository.save(getTheSeatDetailsForId);
+           }
+           else{
+               System.out.println("inside this else part");
+               throw new SeatNotFoundException("The seat is all ready booked");
+           }
+
        }
-        return "Okay";
+
+
     }
 
     @Override
