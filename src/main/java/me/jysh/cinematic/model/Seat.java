@@ -44,7 +44,8 @@ public class Seat {
 
     private Auditorium auditorium;
 
-//    @OneToMany(mappedBy = "seat", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name ="booking_id")
 //    @JsonBackReference
-//    private Set<SeatBooked> bookedSeats;
+    private Set<Booking> bookedSeats;
 }
