@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
-@RestController()
-@RequestMapping("/api")
+
+@RestController
+@RequestMapping("/api/ticketBooking")
 public class TheatreController {
     private TheatreService theatreService;
 
@@ -28,11 +28,18 @@ public class TheatreController {
 
     @GetMapping("/theatres")
     public List<Theatre> getAllTheatres() {
+        System.out.println("something work");
         return theatreService.getAllTheatres();
 
 
     }
+    @GetMapping("/theatre")
+    public String getAllTheatre() {
+        System.out.println("something work");
+        return "OKay";
 
+
+    }
 //    @PostMapping("/theater")
 //    public ResponseEntity saveTheTheater(@RequestParam List<Theatre> theater){
 ////        return theatreService.pushTheatre(theater);

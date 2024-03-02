@@ -1,12 +1,14 @@
 package me.jysh.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+
 
 @Getter
 @Setter

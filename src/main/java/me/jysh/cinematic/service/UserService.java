@@ -1,6 +1,6 @@
 package me.jysh.cinematic.service;
 
-import me.jysh.cinematic.model.User;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

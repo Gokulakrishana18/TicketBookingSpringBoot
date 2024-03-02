@@ -4,7 +4,6 @@ import me.jysh.cinematic.exception.SeatNotFoundException;
 import me.jysh.cinematic.model.Seat;
 import me.jysh.cinematic.repository.SeatRepository;
 import me.jysh.cinematic.service.SeatService;
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

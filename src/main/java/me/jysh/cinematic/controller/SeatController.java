@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/ticketBooking")
 public class SeatController {
     private SeatService seatService;
 
@@ -55,7 +55,7 @@ public class SeatController {
             return seatDetails;
         }
     }
-    @PutMapping (value="/bookingSeat", consumes = "*/*")
+    @PostMapping (value="/bookingSeat", consumes = "*/*")
         public ResponseEntity<String> UpdateTheSeat (@RequestBody  List<Seat> seat)
         {
             log.info("Some thing work");

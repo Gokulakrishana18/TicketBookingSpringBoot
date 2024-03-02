@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Set;
 
 @Getter
@@ -41,11 +42,10 @@ public class Seat {
     @JoinColumn(name = "auditorium_id")
    // @JsonManagedReference
   // @JsonBackReference
-
     private Auditorium auditorium;
 
     @OneToMany
     @JoinColumn(name ="booking_id")
-//    @JsonBackReference
+//   @JsonBackReference
     private Set<Booking> bookedSeats;
 }

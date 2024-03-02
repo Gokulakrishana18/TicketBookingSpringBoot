@@ -1,18 +1,17 @@
 package me.jysh.cinematic.repository;
 
-import me.jysh.cinematic.model.User;
+import me.jysh.cinematic.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-//    @Query("SELECT u FROM User u WHERE u.USER_NAME = ?1")
-//    User findByName(String userName);
-@Query(value = "SELECT * FROM USER WHERE USER_NAME = :userName", nativeQuery = true)
-User findByUsername(String userName);
+import java.util.List;
+@Repository
+public interface UserRepository extends CrudRepository<Users, Long> {
 
 
-//@Query("SELECT u FROM USER u WHERE u.username = :username")
-// User findByName(@Param("username") String username);
+    List<Users> findByEmail(String email);
+
+
 
 }

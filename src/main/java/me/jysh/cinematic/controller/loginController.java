@@ -1,6 +1,5 @@
 package me.jysh.cinematic.controller;
 
-import me.jysh.cinematic.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

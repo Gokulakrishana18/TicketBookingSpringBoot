@@ -2,9 +2,12 @@ package me.jysh.cinematic.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import jakarta.persistence.Id;
 import lombok.*;
 
-import javax.persistence.*;
+
 import java.util.Set;
 
 @Getter

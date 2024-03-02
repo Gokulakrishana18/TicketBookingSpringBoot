@@ -1,48 +1,52 @@
 package me.jysh.cinematic.controller;
 
-import me.jysh.cinematic.model.User;
-import me.jysh.cinematic.service.UserService;
-import me.jysh.cinematic.service.impl.UserServiceImpl;
+
+
+import me.jysh.cinematic.configuration.UserServiceImpl;
+import me.jysh.cinematic.model.LoginDto;
+import me.jysh.cinematic.model.Users;
+import me.jysh.cinematic.repository.UserRepository;
+import me.jysh.cinematic.service.impl.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 public class UserController {
-    @Autowired
-    private UserServiceImpl userService;
 
-//    @Autowired
-//    public UserController(UserService userService) {
-//        this.userService = userService;
-//    }
+@Autowired
+private UserRepository userRepository;
 
-//    @GetMapping("/users")
-//    public List<User> getAllUsers() {
-//        return userService.getAllUsers();
-//    }
-    @GetMapping("/login")
-    public ResponseEntity<?> logi ( User user )
-    {
-        System.out.println(user.getUserName());
-        System.out.println(user.getPassword());
-        String  userName = "jysh";
-        System.out.println("inside the login controller");
-        try {
-            userService. loadUserByUsername(userName);
-            return ResponseEntity.ok("login successfully");
-        }
-        catch(Exception e){
-        return ResponseEntity.ok("Login failed :"+e);
+@Autowired
+private AuthServiceImpl userService;
+
+@Autowired
+private PasswordEncoder passwordEncoder;
+
+    @PostMapping("/user")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+        System.out.println("user name :"+loginDto.getEmail());
+        System.out.println("Password :"+ loginDto.getPassword());
+        System.out.println("Something working");
+        String response = userService.login(loginDto);
+        System.out.println("After service class");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
-    }
-
-    @PostMapping("/logi")
-      public ResponseEntity<?> login ( @RequestBody User user ){
-        System.out.println("user name :"+user.getUserName());
-        System.out.println("user password :"+user.getPassword());
-        return ResponseEntity.ok("Login failed :");
+    @PostMapping("/register")
+      public ResponseEntity<?> register ( @RequestBody Users user ){
+      System.out.println("okay");
+      try {
+         String encodedPassword = passwordEncoder.encode(user.getPwd());
+         user.setPwd(encodedPassword);
+          userRepository.save(user);
+          return ResponseEntity.ok("Register successfully");
+      }
+      catch(Exception e){
+          return ResponseEntity.ok("something going fishy here");
+      }
     }
 }
