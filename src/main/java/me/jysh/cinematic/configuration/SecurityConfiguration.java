@@ -54,13 +54,14 @@ public class SecurityConfiguration {
                         return config;
                     }
                }))
-             .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/user", "/register")
-              .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
-              .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+//             .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/user", "/register")
+//              .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+//              .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
+                .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests)->requests
-//                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         .requestMatchers("/api/ticketBooking/**").authenticated()
-                        .requestMatchers( "/user", "/register").permitAll()
+                        .requestMatchers( "/user", "/register","/booking").permitAll()
 
                 )
                 .formLogin(Customizer.withDefaults())

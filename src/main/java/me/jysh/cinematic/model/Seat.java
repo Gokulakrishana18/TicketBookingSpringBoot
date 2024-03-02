@@ -44,8 +44,8 @@ public class Seat {
   // @JsonBackReference
     private Auditorium auditorium;
 
-    @OneToMany
-    @JoinColumn(name ="booking_id")
+//    @OneToMany
+//    @JoinColumn(name ="booking_id")
 //   @JsonBackReference
-    private Set<Booking> bookedSeats;
+//    private Set<Booking> bookedSeats;
 }

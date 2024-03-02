@@ -55,7 +55,7 @@ public class SeatController {
             return seatDetails;
         }
     }
-    @PostMapping (value="/bookingSeat", consumes = "*/*")
+    @PutMapping (value="/bookingSeat", consumes = "*/*")
         public ResponseEntity<String> UpdateTheSeat (@RequestBody  List<Seat> seat)
         {
             log.info("Some thing work");
