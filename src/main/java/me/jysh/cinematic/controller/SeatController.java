@@ -57,6 +57,7 @@ public class SeatController {
     }
     @PutMapping (value="/bookingSeat", consumes = "*/*")
         public ResponseEntity<String> UpdateTheSeat (@RequestBody  List<Seat> seat)
+
         {
             log.info("Some thing work");
             System.out.println("inside the Update Statement");
