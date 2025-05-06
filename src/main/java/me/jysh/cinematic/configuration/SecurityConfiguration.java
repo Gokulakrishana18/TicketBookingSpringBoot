@@ -60,8 +60,9 @@ public class SecurityConfiguration {
                 .csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests)->requests
 
-                        .requestMatchers("/api/ticketBooking/**").authenticated()
+                       // .requestMatchers("/api/ticketBooking/**").permitAll()
                         .requestMatchers( "/user", "/register","/booking").permitAll()
+                        .anyRequest().authenticated()
 
                 )
                 .formLogin(Customizer.withDefaults())

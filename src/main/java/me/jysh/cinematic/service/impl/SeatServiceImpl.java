@@ -64,9 +64,13 @@ public class SeatServiceImpl implements SeatService {
        for(Seat seat:setTheValue) {
            // Seat getTheSeat = new Seat();
            Long id = seat.getId();
+           System.out.println("id :"+ seat.toString() +" qwr :"+id);
            Seat getTheSeatDetailsForId = seatRepository.findById(id).orElseThrow(() -> new SeatNotFoundException("Seat not found with this id"));
+           System.out.println("getTheSeatDetailsForId "+ getTheSeatDetailsForId.getSeatNumber()+" "+getTheSeatDetailsForId.isBooked());
            if(!getTheSeatDetailsForId.isBooked()) {
-               getTheSeatDetailsForId.setBooked(seat.isBooked());
+               System.out.println("inside");
+               System.out.println(seat.isBooked());
+               getTheSeatDetailsForId.setBooked(true);
                seatRepository.save(getTheSeatDetailsForId);
            }
            else{
